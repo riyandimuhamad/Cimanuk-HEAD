@@ -140,9 +140,16 @@ elif menu == "Lag Time Tracker":
                     lon_hujan = df_h_filtered['Longitude'].iloc[0]
                     lon_air = df_a_filtered['Longitude'].iloc[0]
                     
+                    pilihan_peta = st.radio("Pilih Tampilan Peta Lapisan Bawah:", ["Peta Terang (Default)", "Mode Gelap", "Citra Satelit"], horizontal=True, key="peta_lag")
+                    
                     with st.spinner("Merender KML Jaringan Sungai..."):
                         # Pusat peta berada di tengah-tengah antara Hulu dan Hilir
-                        m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="CartoDB positron")
+                        if pilihan_peta == "Citra Satelit":
+                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", attr="Google")
+                        elif pilihan_peta == "Mode Gelap":
+                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="CartoDB dark_matter")
+                        else:
+                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="CartoDB positron")
                         
                         # Muat Jaringan Sungai
                         kml_sungai = "Peta Jaringan Sungai.kml"
@@ -176,7 +183,8 @@ elif menu == "Lag Time Tracker":
                                 folium.GeoJson(
                                     gdf_sungai_cropped,
                                     name="Aliran Sungai (Hulu-Hilir)",
-                                    style_function=style_sungai
+                                    style_function=style_sungai,
+                                    smooth_factor=0  # Memaksa render titik asli (mencegah garis nabrak rumah warga)
                                 ).add_to(m_lag)
                             except:
                                 pass
@@ -334,6 +342,14 @@ elif menu == "Peta Infrastruktur Terpadu":
         df_map = pd.concat([loc_hujan, loc_air], ignore_index=True)
         
         if not df_map.empty:
+            pilihan_peta_2 = st.radio("Pilih Tampilan Peta Dasar:", ["Peta Terang (Default)", "Mode Gelap", "Peta Jalan (OSM)"], horizontal=True, key="peta_infra")
+            
+            style_dict = {
+                "Peta Terang (Default)": "carto-positron",
+                "Mode Gelap": "carto-darkmatter",
+                "Peta Jalan (OSM)": "open-street-map"
+            }
+            
             fig = px.scatter_mapbox(
                 df_map, 
                 lat="Latitude", 
@@ -349,7 +365,7 @@ elif menu == "Peta Infrastruktur Terpadu":
                 title="Peta Titik Pantau Hidrologi (Versi Ringan)"
             )
             fig.update_layout(
-                mapbox_style="carto-positron", 
+                mapbox_style=style_dict[pilihan_peta_2], 
                 margin={"r":0,"t":40,"l":0,"b":0}, 
                 height=600,
                 legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)

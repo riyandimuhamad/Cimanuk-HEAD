@@ -42,7 +42,7 @@ def calculate_analytics():
             best_corr = corr
             best_lag = lag
 
-    print(f"✅ Lag Time Terbaik: {best_lag} Jam (Korelasi Pearson: {best_corr:.4f})")
+    print(f" Lag Time Terbaik: {best_lag} Jam (Korelasi Pearson: {best_corr:.4f})")
 
     # ==========================================
     # SUB-TASK 4.2: KALKULASI KRS
@@ -87,7 +87,7 @@ def calculate_analytics():
     df_results = pd.DataFrame(krs_results)
     if not df_results.empty:
         df_results.to_csv(out_path, index=False)
-        print(f"✅ Hasil analitik berhasil disimpan ke: {out_path}")
+        print(f" Hasil analitik berhasil disimpan ke: {out_path}")
     else:
         print("Peringatan: Tidak ada data KRS yang dapat dihitung.")
 
