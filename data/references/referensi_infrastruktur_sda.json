@@ -1,0 +1,41 @@
+{
+  "balai": "BALAI BESAR WILAYAH SUNGAI CIMANUK CISANGGARUNG",
+  "infrastruktur": {
+    "bendungan": {
+      "jumlah_unit": 9,
+      "luas_tangkapan_air_km2": 1658.28,
+      "layanan_irigasi_ha": 133929,
+      "penyediaan_air_baku_l_dtk": 4830,
+      "plta_mw": 113.5,
+      "reduksi_banjir_m3_dtk": 2865.28,
+      "tampungan_efektif_m3": 1082001678.3
+    },
+    "bendung": {
+      "tetap": {
+        "jumlah_unit": 11,
+        "irigasi_ha": 38180,
+        "air_baku_l_dtk": 0
+      },
+      "gerak": {
+        "jumlah_unit": 6,
+        "irigasi_ha": 97033,
+        "air_baku_l_dtk": 0
+      },
+      "karet": {
+        "jumlah_unit": 11,
+        "irigasi_ha": 2182,
+        "air_baku_l_dtk": 175
+      }
+    },
+    "embung": {
+      "jumlah_unit": 32,
+      "konservasi_volume_tampungan_normal_m3": 212158862,
+      "irigasi_ha": 2502.75,
+      "air_baku_l_dtk": 0
+    },
+    "tampungan_alami": {
+      "jumlah_unit": 24,
+      "volume_tampungan_m3": 6816139294
+    }
+  }
+}

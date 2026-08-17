@@ -1,7 +1,8 @@
 # Folder Data Mentah Raksasa (JANGAN DIPUSH!)
-Dataset/raw_data/
-Arsip_Data_Scraping/
-
+data/raw/
+data/processed/
+*.parquet
+docs/arsip/
 # File Temporary Python
 __pycache__/
 *.pyc

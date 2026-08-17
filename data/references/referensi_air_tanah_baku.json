@@ -1,0 +1,24 @@
+{
+  "balai": "BALAI BESAR WILAYAH SUNGAI CIMANUK CISANGGARUNG",
+  "air_tanah_dan_air_baku": {
+    "sumur_jiat": {
+      "jumlah_unit": 291,
+      "layanan_irigasi_ha": 5039
+    },
+    "sumur_air_baku": {
+      "jumlah_unit": 75,
+      "manfaat_jiwa_orang": 13900
+    },
+    "mata_air": {
+      "jumlah_titik": 26,
+      "manfaat_jiwa_orang": 73506
+    },
+    "intake_air_baku": {
+      "jumlah_unit": 32,
+      "manfaat_jiwa_orang": 1241000
+    },
+    "pah_absah": {
+      "jumlah_unit": 24
+    }
+  }
+}

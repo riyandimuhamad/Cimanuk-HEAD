@@ -1,0 +1,21 @@
+{
+  "balai": "BALAI BESAR WILAYAH SUNGAI CIMANUK CISANGGARUNG",
+  "irigasi": {
+    "di_permukaan": {
+      "jumlah_di": 10,
+      "luas_ha": 135675
+    },
+    "di_pompa": {
+      "jumlah_di": 0,
+      "luas_ha": 0
+    },
+    "di_rawa": {
+      "jumlah_di": 0,
+      "luas_ha": 0
+    },
+    "di_tambak": {
+      "jumlah_di": 0,
+      "luas_ha": 0
+    }
+  }
+}
