@@ -1,0 +1,76 @@
+{
+  "balai": "BALAI BESAR WILAYAH SUNGAI CIMANUK CISANGGARUNG",
+  "pengendalian_daya_rusak_air": {
+    "pengendali_banjir": {
+      "jumlah_unit": 22,
+      "total_panjang_km": 10.18
+    },
+    "pengendali_sedimen": {
+      "cekdam": {
+        "jumlah_unit": 13,
+        "daya_tampung_m3": 22827
+      },
+      "sabodam": {
+        "jumlah_unit": 1,
+        "daya_tampung_m3": 2940
+      },
+      "krib": {
+        "jumlah_unit": 0,
+        "panjang_km": 0
+      },
+      "tanggul": {
+        "jumlah_unit": 0,
+        "panjang_km": 0
+      },
+      "kantong_lahar": {
+        "jumlah_unit": 0,
+        "panjang_km": 0
+      },
+      "groundsil": {
+        "jumlah_unit": 7,
+        "panjang_km": 0.34
+      },
+      "dam_konsolidasi": {
+        "jumlah_unit": 0,
+        "panjang_km": 0
+      }
+    },
+    "rumah_pompa": {
+      "jumlah_unit": 1,
+      "total_kapasitas_pompa": 0
+    },
+    "pompa_banjir": {
+      "jumlah_unit": 1
+    },
+    "mobile_pump": {
+      "jumlah_unit": 1,
+      "total_kapasitas_pompa": 0
+    },
+    "pengaman_pantai": {
+      "groin": {
+        "jumlah_unit": 3,
+        "panjang_km": 2.1
+      },
+      "jetty": {
+        "jumlah_unit": 11,
+        "panjang_km": 4.92
+      },
+      "pemecah_gelombang": {
+        "jumlah_unit": 14,
+        "panjang_km": 18.27
+      },
+      "tanggul_laut": {
+        "jumlah_unit": 0,
+        "panjang_km": 0
+      },
+      "tembok_laut": {
+        "jumlah_unit": 1,
+        "panjang_km": 0.35
+      },
+      "revetment": {
+        "jumlah_unit": 3,
+        "panjang_km": 1.6
+      }
+    }
+  }
+}

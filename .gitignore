@@ -1,0 +1,14 @@
+# Folder Data Mentah Raksasa (JANGAN DIPUSH!)
+Dataset/raw_data/
+Arsip_Data_Scraping/
+
+# File Temporary Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Environment Variables
+.env
+.venv/
+env/
+venv/
