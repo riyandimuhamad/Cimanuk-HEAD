@@ -418,7 +418,7 @@ elif menu == "Peta Infrastruktur Terpadu":
             )
             
             st.plotly_chart(fig, use_container_width=True)
-            st.info("Peta di atas diproses secara efisien dengan merender titik koordinat yang tertanam langsung di dalam database (tanpa harus memuat file spasial eksternal yang memberatkan memori).")
+            st.info("Peta di atas diproses secara efisien dengan merender titik koordinat yang tertanam langsung di dalam database tanpa harus memuat file spasial eksternal yang memberatkan memori.")
         else:
             st.warning("Data koordinat Latitude/Longitude tidak ditemukan di dataset.")
 
