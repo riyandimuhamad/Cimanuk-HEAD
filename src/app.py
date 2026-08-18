@@ -424,3 +424,6 @@ elif menu == "Peta Infrastruktur Terpadu":
 
 st.sidebar.markdown("---")
 st.sidebar.caption("Sistem Pendukung Keputusan © 2026")
+
+# Menambahkan ruang kosong ekstra di bawah (Padding) agar saat iframe di-crop, konten utama tidak mentok
+st.markdown("<br><br><br>", unsafe_allow_html=True)
