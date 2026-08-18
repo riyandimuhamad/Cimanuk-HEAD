@@ -24,8 +24,8 @@ st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # Judul Aplikasi
 st.title("Cimanuk-HEAD")
-st.subheader("Hydrological Early Warning & Analytics Dashboard")
-st.markdown("Sistem Pendukung Keputusan Pemantauan Hidrologi & Mitigasi Bencana BBWS Cimanuk Cisanggarung")
+st.subheader("Dasbor Peringatan Dini & Analitik Hidrologi")
+st.markdown("Sistem Pendukung Keputusan BBWS Cimanuk-Cisanggarung")
 st.markdown("---")
 
 # Fungsi untuk load data (Menggunakan cache agar ngebut)
