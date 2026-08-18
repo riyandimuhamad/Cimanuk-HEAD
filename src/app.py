@@ -8,7 +8,7 @@ import geopandas as gpd
 
 # Konfigurasi Halaman (Harus diletakkan paling atas)
 st.set_page_config(
-    page_title="Dasbor Cimanuk-HEAD",
+    page_title="Cimanuk-HEAD | Hydrologi",
     layout="wide",
     initial_sidebar_state="expanded"
 )

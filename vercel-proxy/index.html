@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasbor Cimanuk-HEAD</title>
+    <title>Cimanuk-HEAD | Hydrologi</title>
     <!-- Favicon standar KemenPU atau Dashboard -->
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Logo_PU_%28Kementerian_Pekerjaan_Umum_dan_Perumahan_Rakyat%29.png/220px-Logo_PU_%28Kementerian_Pekerjaan_Umum_dan_Perumahan_Rakyat%29.png" type="image/x-icon">
     <style>
@@ -16,13 +16,14 @@
         }
         iframe { 
             width: 100%; 
-            height: 100%; 
+            height: calc(100% + 45px); /* Menarik iframe ke bawah agar footer terpotong */
             border: none; 
+            margin-bottom: -45px;
         }
     </style>
 </head>
 <body>
-    <!-- Memuat Streamlit App secara penuh tanpa menu atas bawaan -->
-    <iframe src="https://cimanuk-head.streamlit.app/"></iframe>
+    <!-- Membalikan embed=true agar tidak diblokir, tapi footernya di-crop pakai CSS atas -->
+    <iframe src="https://cimanuk-head.streamlit.app/?embed=true"></iframe>
 </body>
 </html>
