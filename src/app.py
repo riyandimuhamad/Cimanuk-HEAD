@@ -12,6 +12,15 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# Menyembunyikan elemen bawaan Streamlit (Header, Footer, Hamburger Menu)
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # Judul Aplikasi
 st.title("Cimanuk-HEAD")
