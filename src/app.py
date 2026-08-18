@@ -216,7 +216,7 @@ elif menu == "Lag Time Tracker":
                             y=plot_h['clean_value'], 
                             name=f"Curah Hujan di {stasiun_hujan}", 
                             marker_color="rgba(52, 152, 219, 0.7)",
-                            width=1000 * 3600 * 24  # Paksa lebar balok 1 hari agar tidak menipis dan menghilang
+                            width=1000 * 3600 * 1  # Ubah ke 1 Jam agar akurat saat di-zoom
                         ),
                         secondary_y=False,
                     )
@@ -232,7 +232,12 @@ elif menu == "Lag Time Tracker":
                         height=550, hovermode="x unified"
                     )
                     
-                    # Konfigurasi Sumbu Y
+                    # Konfigurasi Sumbu X dan Y
+                    fig.update_xaxes(
+                        title_text="Tanggal & Jam", 
+                        tickformat="%d %b\n%H:%M",  # Memaksa tampilan Jam (HH:MM) di bawah tanggal
+                        hoverformat="%d %b %Y, %H:%M" # Format saat mouse diarahkan
+                    )
                     fig.update_yaxes(title_text="Intensitas Curah Hujan dalam milimeter", secondary_y=False, autorange="reversed")
                     fig.update_yaxes(title_text="Tinggi Muka Air dalam meter", secondary_y=True)
                     
