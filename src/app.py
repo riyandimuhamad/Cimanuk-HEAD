@@ -52,7 +52,7 @@ def load_data():
 df_hujan, df_air, df_analytics = load_data()
 
 # Struktur Sidebar (Menu Samping)
-st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Logo_PU_%28Kementerian_Pekerjaan_Umum_dan_Perumahan_Rakyat%29.png/220px-Logo_PU_%28Kementerian_Pekerjaan_Umum_dan_Perumahan_Rakyat%29.png", width=80)
+st.sidebar.markdown("### 🏢 BBWS Cimanuk")
 st.sidebar.title("Navigasi Sistem")
 menu = st.sidebar.radio("Pilih Modul Analitik:", [
     "Dashboard Overview", 
@@ -406,7 +406,7 @@ elif menu == "Peta Infrastruktur Terpadu":
                 },
                 zoom=8, 
                 center={"lat": -6.83, "lon": 108.15},
-                title="Peta Titik Pantau Hidrologi (Versi Ringan)"
+                title="Peta Titik Pantau Hidrologi"
             )
             fig.update_layout(
                 mapbox_style=style_dict[pilihan_peta_2], 
