@@ -64,7 +64,37 @@ if menu == "Dashboard Overview":
         col3.metric("Total Stasiun Hujan", df_hujan['Nama_Stasiun'].nunique())
         col4.metric("Total Stasiun Air", df_air['Nama_Stasiun'].nunique())
         
-        st.info("Pilih modul navigasi pada panel kiri untuk melihat analisis spesifik atau pemetaan spasial.")
+        st.markdown("---")
+        st.subheader("Profil Distribusi Data Historis Sensor")
+        st.markdown("Menjawab rumusan masalah ke-1 pada *Project Plan*: **Memprofilkan kualitas dan keandalan transmisi pengiriman data historis** dari seluruh perangkat *Internet of Things* (IoT) BBWS di DAS Cimanuk.")
+        
+        # Agregasi jumlah data per tahun
+        df_h_count = df_hujan['DateTime'].dt.year.value_counts().reset_index()
+        df_h_count.columns = ['Tahun', 'Volume Data Hujan']
+        df_a_count = df_air['DateTime'].dt.year.value_counts().reset_index()
+        df_a_count.columns = ['Tahun', 'Volume Data Air']
+        
+        # Menggabungkan data Hujan dan Air
+        df_trend = pd.merge(df_h_count, df_a_count, on='Tahun', how='outer').fillna(0).sort_values('Tahun')
+        df_trend['Tahun'] = df_trend['Tahun'].astype(int).astype(str) # Ubah ke string agar axis X tidak pakai koma (2,020)
+        
+        # Visualisasi menggunakan Plotly
+        import plotly.graph_objects as go
+        fig_trend = go.Figure()
+        fig_trend.add_trace(go.Bar(x=df_trend['Tahun'], y=df_trend['Volume Data Hujan'], name='Sensor Curah Hujan', marker_color='#3498db'))
+        fig_trend.add_trace(go.Bar(x=df_trend['Tahun'], y=df_trend['Volume Data Air'], name='Sensor Muka Air', marker_color='#e74c3c'))
+        
+        fig_trend.update_layout(
+            barmode='group',
+            xaxis_title="Tahun Perekaman",
+            yaxis_title="Total Baris Data Terkirim",
+            height=400,
+            hovermode="x unified",
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        )
+        st.plotly_chart(fig_trend, use_container_width=True)
+        
+        st.info("Pilih modul navigasi pada panel kiri untuk masuk ke menu analisis spesifik atau pemetaan spasial.")
 
 # ==========================================
 # HALAMAN 2: LAG TIME TRACKER
