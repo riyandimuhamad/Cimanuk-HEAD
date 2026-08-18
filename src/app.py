@@ -17,7 +17,6 @@ hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
-            header {visibility: hidden;}
             .viewerBadge_container {display: none !important;}
             .viewerBadge_link {display: none !important;}
             </style>
