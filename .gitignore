@@ -1,7 +1,7 @@
 # Folder Data Mentah Raksasa (JANGAN DIPUSH!)
 data/raw/
-data/processed/
-*.parquet
+# data/processed/
+# *.parquet
 docs/arsip/
 # File Temporary Python
 __pycache__/
