@@ -42,5 +42,5 @@ Proyek ini merupakan Sistem Peringatan Dini dan Analitik Hidrologi berbasis WebG
 4. Akses melalui browser pada alamat `http://localhost:8501`
 
 ---
-*Proyek ini disusun sebagai pemenuhan syarat Kerja Praktik / Skripsi Program Studi Sistem Informasi.*
+*Proyek ini disusun sebagai pemenuhan syarat Kerja Praktik Program Studi Sistem Informasi.*
 *Hak cipta data milik BBWS Cimanuk-Cisanggarung.*
