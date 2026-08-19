@@ -308,7 +308,7 @@ elif menu == "Lag Time Tracker":
                         col_k1, col_k2, col_k3 = st.columns(3)
                         col_k1.metric("Muka Air Tertinggi", f"{max_level:.2f} meter")
                         col_k2.metric("Muka Air Terendah", f"{min_level:.2f} meter")
-                        col_k3.metric("Skor KRS (Periode Ini)", f"{krs_value:.1f}")
+                        col_k3.metric("Skor KRS Periode Ini", f"{krs_value:.1f}")
                         
                         if warna == "success":
                             st.success(f"**Status DAS:** {status_krs}  \n**Analisis:** {pesan}")
