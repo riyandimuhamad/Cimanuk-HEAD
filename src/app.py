@@ -386,6 +386,11 @@ elif menu == "Peta Infrastruktur Terpadu":
         # Gabungkan data stasiun
         df_map = pd.concat([loc_hujan, loc_air], ignore_index=True)
         
+        # FIX: Memaksa koordinat menjadi numerik agar tidak memicu AttributeError di Plotly
+        df_map['Latitude'] = pd.to_numeric(df_map['Latitude'], errors='coerce')
+        df_map['Longitude'] = pd.to_numeric(df_map['Longitude'], errors='coerce')
+        df_map = df_map.dropna(subset=['Latitude', 'Longitude'])
+        
         if not df_map.empty:
             pilihan_peta_2 = st.radio("Pilih Tampilan Peta Dasar:", ["Peta Terang (Default)", "Mode Gelap", "Peta Jalan (OSM)"], horizontal=True, key="peta_infra")
             
