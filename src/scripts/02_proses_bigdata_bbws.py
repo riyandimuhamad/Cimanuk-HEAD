@@ -40,7 +40,8 @@ for file_idx, file in enumerate(all_files, 1):
             'longitude': 'Longitude',
             'last_sending_data': 'DateTime',
             'value': 'clean_value',
-            'das name': 'DAS'
+            'das name': 'DAS',
+            'unit': 'Satuan'
         })
         
         # 2. Filter hanya DAS Cimanuk
@@ -61,6 +62,13 @@ for file_idx, file in enumerate(all_files, 1):
         # 5. Filter Data Air & Pembersihan Outlier
         if 'hidrologi_type' in chunk.columns:
             df_air = chunk[chunk['hidrologi_type'].astype(str).str.contains('DUGA AIR|TMA', case=False)].copy()
+            
+            # --- KONVERSI SATUAN SENTIMETER KE METER ---
+            if 'Satuan' in df_air.columns:
+                is_cm = df_air['Satuan'].astype(str).str.lower().str.strip() == 'cm'
+                df_air.loc[is_cm, 'clean_value'] = df_air.loc[is_cm, 'clean_value'] / 100
+                
+            # Filter batas luapan logis (Maksimal kedalaman 30 Meter)
             df_air = df_air[(df_air['clean_value'] >= 0) & (df_air['clean_value'] < 30)]
         else:
             df_air = pd.DataFrame()
