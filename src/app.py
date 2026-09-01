@@ -391,6 +391,12 @@ elif menu == "Peta Infrastruktur Terpadu":
         df_map['Longitude'] = pd.to_numeric(df_map['Longitude'], errors='coerce')
         df_map = df_map.dropna(subset=['Latitude', 'Longitude'])
         
+        # FIX Cloud AttributeError: Konversi tipe ke standar numpy/python
+        df_map['Tipe'] = df_map['Tipe'].astype(str)
+        df_map['Nama_Stasiun'] = df_map['Nama_Stasiun'].astype(str)
+        df_map['Latitude'] = df_map['Latitude'].astype(float)
+        df_map['Longitude'] = df_map['Longitude'].astype(float)
+        
         if not df_map.empty:
             pilihan_peta_2 = st.radio("Pilih Tampilan Peta Dasar:", ["Peta Terang (Default)", "Mode Gelap", "Peta Jalan (OSM)"], horizontal=True, key="peta_infra")
             
@@ -412,10 +418,10 @@ elif menu == "Peta Infrastruktur Terpadu":
                 },
                 zoom=8, 
                 center={"lat": -6.83, "lon": 108.15},
-                title="Peta Titik Pantau Hidrologi"
+                title="Peta Titik Pantau Hidrologi",
+                mapbox_style=style_dict[pilihan_peta_2]
             )
             fig.update_layout(
-                mapbox_style=style_dict[pilihan_peta_2], 
                 margin={"r":0,"t":40,"l":0,"b":0}, 
                 height=600,
                 legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
