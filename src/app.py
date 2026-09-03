@@ -57,9 +57,9 @@ st.sidebar.markdown("### 🏢 BBWS Cimanuk")
 st.sidebar.title("Navigasi Sistem")
 menu = st.sidebar.radio("Pilih Modul Analitik:", [
     "Dashboard Overview", 
+    "Peta Infrastruktur Terpadu",
     "Lag Time Tracker", 
-    "Basin Health & KRS", 
-    "Peta Infrastruktur Terpadu"
+    "Basin Health & KRS"
 ])
 
 # ==========================================
