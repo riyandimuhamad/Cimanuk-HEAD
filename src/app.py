@@ -180,16 +180,25 @@ elif menu == "Lag Time Tracker":
                     lon_hujan = df_h_filtered['Longitude'].iloc[0]
                     lon_air = df_a_filtered['Longitude'].iloc[0]
                     
-                    pilihan_peta = st.radio("Pilih Tampilan Peta Lapisan Bawah:", ["Peta Terang (Default)", "Mode Gelap", "Citra Satelit"], horizontal=True, key="peta_lag")
+                    pilihan_peta = st.radio("Pilih Tampilan Peta Lapisan Bawah:", ["Peta Standar (OSM)", "Topografi Aliran Sungai", "Citra Satelit"], horizontal=True, key="peta_lag")
                     
                     with st.spinner("Merender KML Jaringan Sungai..."):
                         # Pusat peta berada di tengah-tengah antara Hulu dan Hilir
                         if pilihan_peta == "Citra Satelit":
-                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", attr="Google")
-                        elif pilihan_peta == "Mode Gelap":
-                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="CartoDB dark_matter")
+                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", attr="Google Satellite")
+                        elif pilihan_peta == "Topografi Aliran Sungai":
+                            m_lag = folium.Map(
+                                location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], 
+                                zoom_start=9, 
+                                tiles="https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", 
+                                attr="Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, USGS"
+                            )
                         else:
-                            m_lag = folium.Map(location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], zoom_start=9, tiles="CartoDB positron")
+                            m_lag = folium.Map(
+                                location=[(lat_hujan + lat_air)/2, (lon_hujan + lon_air)/2], 
+                                zoom_start=9, 
+                                tiles="OpenStreetMap"
+                            )
                         
                         # Muat Jaringan Sungai
                         kml_sungai = "assets/kml/Peta Jaringan Sungai.kml"
@@ -364,6 +373,11 @@ elif menu == "Basin Health & KRS":
         st.subheader("Data Analitik Historis")
         # Menyembunyikan kolom Lag_Time_Jam agar tidak membingungkan fokus audiens dari topik KRS
         df_display = df_analytics.drop(columns=['Lag_Time_Jam'], errors='ignore')
+        
+        # Mereset nomor indeks baris agar mulai dari angka 1 (bukan 127 bawaan filter)
+        df_display = df_display.reset_index(drop=True)
+        df_display.index += 1
+        
         st.dataframe(df_display, use_container_width=True)
         
         st.warning("Peringatan Dampak (Contextual Intelligence): Peningkatan skor KRS mengindikasikan degradasi area resapan air di hulu. Fluktuasi muka air yang ekstrem mengancam pasokan air baku bagi populasi sekitar serta kebutuhan 135.675 hektar lahan pada Daerah Irigasi Rentang.")
@@ -398,34 +412,79 @@ elif menu == "Peta Infrastruktur Terpadu":
         df_map['Longitude'] = df_map['Longitude'].astype(float)
         
         if not df_map.empty:
-            pilihan_peta_2 = st.radio("Pilih Tampilan Peta Dasar:", ["Peta Terang (Default)", "Mode Gelap", "Peta Jalan (OSM)"], horizontal=True, key="peta_infra")
+            pilihan_peta_2 = st.radio("Pilih Tampilan Peta Dasar:", ["Peta Standar (OSM)", "Peta Citra Satelit", "Peta Polos (White)"], horizontal=True, key="peta_infra")
             
-            style_dict = {
-                "Peta Terang (Default)": "carto-positron",
-                "Mode Gelap": "carto-darkmatter",
-                "Peta Jalan (OSM)": "open-street-map"
-            }
-            
-            fig = px.scatter_mapbox(
-                df_map, 
-                lat="Latitude", 
-                lon="Longitude", 
-                color="Tipe",
-                hover_name="Nama_Stasiun",
-                color_discrete_map={
-                    'Pos Pengamatan Curah Hujan': '#3498db', 
-                    'Pos Pemantauan Muka Air': '#e74c3c'
-                },
-                zoom=8, 
-                center={"lat": -6.83, "lon": 108.15},
-                title="Peta Titik Pantau Hidrologi",
-                mapbox_style=style_dict[pilihan_peta_2]
-            )
-            fig.update_layout(
-                margin={"r":0,"t":40,"l":0,"b":0}, 
-                height=600,
-                legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
-            )
+            if pilihan_peta_2 == "Peta Citra Satelit":
+                fig = px.scatter_mapbox(
+                    df_map, 
+                    lat="Latitude", 
+                    lon="Longitude", 
+                    color="Tipe",
+                    hover_name="Nama_Stasiun",
+                    color_discrete_map={
+                        'Pos Pengamatan Curah Hujan': '#3498db', 
+                        'Pos Pemantauan Muka Air': '#e74c3c'
+                    },
+                    zoom=8, 
+                    center={"lat": -6.83, "lon": 108.15},
+                    title="Peta Titik Pantau Hidrologi"
+                )
+                fig.update_layout(
+                    mapbox_style="white-bg",
+                    mapbox_layers=[
+                        {
+                            "below": 'traces',
+                            "sourcetype": "raster",
+                            "sourceattribution": "Google Satellite",
+                            "source": ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"]
+                        }
+                    ],
+                    margin={"r":0,"t":40,"l":0,"b":0}, 
+                    height=600,
+                    legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+                )
+            elif pilihan_peta_2 == "Peta Polos (White)":
+                fig = px.scatter_mapbox(
+                    df_map, 
+                    lat="Latitude", 
+                    lon="Longitude", 
+                    color="Tipe",
+                    hover_name="Nama_Stasiun",
+                    color_discrete_map={
+                        'Pos Pengamatan Curah Hujan': '#3498db', 
+                        'Pos Pemantauan Muka Air': '#e74c3c'
+                    },
+                    zoom=8, 
+                    center={"lat": -6.83, "lon": 108.15},
+                    title="Peta Titik Pantau Hidrologi",
+                    mapbox_style="white-bg"
+                )
+                fig.update_layout(
+                    margin={"r":0,"t":40,"l":0,"b":0}, 
+                    height=600,
+                    legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+                )
+            else:
+                fig = px.scatter_mapbox(
+                    df_map, 
+                    lat="Latitude", 
+                    lon="Longitude", 
+                    color="Tipe",
+                    hover_name="Nama_Stasiun",
+                    color_discrete_map={
+                        'Pos Pengamatan Curah Hujan': '#3498db', 
+                        'Pos Pemantauan Muka Air': '#e74c3c'
+                    },
+                    zoom=8, 
+                    center={"lat": -6.83, "lon": 108.15},
+                    title="Peta Titik Pantau Hidrologi",
+                    mapbox_style="open-street-map"
+                )
+                fig.update_layout(
+                    margin={"r":0,"t":40,"l":0,"b":0}, 
+                    height=600,
+                    legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+                )
             
             st.plotly_chart(fig, use_container_width=True)
             st.info("Peta di atas diproses secara efisien dengan merender titik koordinat yang tertanam langsung di dalam database tanpa harus memuat file spasial eksternal yang memberatkan memori.")
