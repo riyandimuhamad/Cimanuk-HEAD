@@ -99,8 +99,10 @@ if menu == "Dashboard Overview":
             yaxis_title="Total Baris Data Terkirim",
             height=400,
             hovermode="x unified",
+            yaxis=dict(tickformat=","),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
         )
+        fig_trend.update_traces(hovertemplate="%{y:,} baris")
         st.plotly_chart(fig_trend, use_container_width=True)
         
         st.info("Pilih modul navigasi pada panel kiri untuk masuk ke menu analisis spesifik atau pemetaan spasial.")
