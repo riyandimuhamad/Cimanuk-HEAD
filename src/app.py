@@ -76,7 +76,6 @@ if menu == "Dashboard Overview":
         
         st.markdown("---")
         st.subheader("Profil Distribusi Data Historis Sensor")
-        st.markdown("Menjawab rumusan masalah ke-1 pada *Project Plan*: **Memprofilkan kualitas dan keandalan transmisi pengiriman data historis** dari seluruh perangkat *Internet of Things* (IoT) BBWS di DAS Cimanuk.")
         
         # Agregasi jumlah data per tahun
         df_h_count = df_hujan['DateTime'].dt.year.value_counts().reset_index()
